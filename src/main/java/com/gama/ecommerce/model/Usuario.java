@@ -16,7 +16,7 @@ public class Usuario {
     private Long id;
     @NotBlank(message = "campo name não pode ser nulo")
     @Size(min = 1, max = 80)
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 80)
     private String nome;
 
     @NotBlank(message = "campo email não pode ser nulo")
@@ -97,6 +97,23 @@ public class Usuario {
 
     public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     @Override

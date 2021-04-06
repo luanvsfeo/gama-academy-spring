@@ -11,15 +11,18 @@ public class Venda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Double valorTotal;
+
     @ManyToOne
     private Usuario usuario;
+
     private Date dataVenda;
+
     @OneToMany
     private List<ProdutoVenda> produtoVendaList = new ArrayList<>();
 
-    public Venda() {
-    }
+    public Venda() { }
 
     public Venda(Double valorTotal, Usuario usuario, Date dataVenda, List<ProdutoVenda> produtoVendaList) {
         this.valorTotal = valorTotal;

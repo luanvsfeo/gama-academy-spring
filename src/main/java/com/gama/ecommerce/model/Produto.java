@@ -39,8 +39,7 @@ public class Produto {
     @Column(nullable = false)
     private Integer quantidadeDisponivel;
 
-    public Produto() {
-    }
+    public Produto() { }
 
     public Produto(String codigoBarra, @NotBlank(message = "campo nome não pode ser nulo") @Size(min = 1, max = 80) String nome, @NotBlank(message = "campo unidadeMedida não pode ser nulo") @Size(min = 1, max = 50) String unidadeMedida, Marca marca, Categoria categoria, @NotBlank(message = "campo valorUnitario não pode ser nulo") @Size(min = 1, max = 50) Double valorUnitario, @NotBlank(message = "campo quantidade não pode ser nulo") @Min(1) @Max(100) Integer quantidadeDisponivel) {
         this.codigoBarra = codigoBarra;

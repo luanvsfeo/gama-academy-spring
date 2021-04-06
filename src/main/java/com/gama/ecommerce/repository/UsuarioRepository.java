@@ -20,13 +20,4 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     Optional<Usuario> findById(Long id);
 
-    /*@Query("select c from Pessoa c where c.nome = ?1")
-    Optional<Pessoa> findByNome(String nome);
-
-    @Query("select c from Pessoa c where c.cpf = ?1")
-    Optional<Pessoa> findByCpf(String cpf);
-
-    @Query("select c from Pessoa c where c.email = ?1")
-    Optional<Pessoa> findByEmail(String email);*/
-
 }

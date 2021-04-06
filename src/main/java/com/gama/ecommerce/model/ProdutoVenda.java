@@ -8,13 +8,18 @@ public class ProdutoVenda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
     @JoinColumn(name = "produto_id")
     private Produto produto;
+
     @ManyToOne
     private Venda venda;
+
     private Integer quantidade;
+
     private Double valorTotal;
+
     private Double valorUnitario;
 
     public ProdutoVenda() {
