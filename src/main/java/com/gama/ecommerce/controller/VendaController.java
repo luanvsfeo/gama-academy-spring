@@ -1,6 +1,5 @@
 package com.gama.ecommerce.controller;
 
-import com.gama.ecommerce.model.Produto;
 import com.gama.ecommerce.model.ProdutoVenda;
 import com.gama.ecommerce.model.Usuario;
 import com.gama.ecommerce.model.Venda;
@@ -9,7 +8,6 @@ import com.gama.ecommerce.repository.ProdutoVendaRepository;
 import com.gama.ecommerce.repository.VendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Date;
 import java.util.List;
 
@@ -42,6 +40,12 @@ public class VendaController {
     @PostMapping
     public void criar(@RequestBody Venda venda){
 
+
+        Venda posSave = vendaRepository.save(venda);
+
+        posSave.setListaProdutoVenda(venda.getListaProdutoVenda());
+
+        // TODO - Diminuir a quantidade em estoque de cada produto
         double valorTotal = 0;
 
         for(ProdutoVenda produtoVenda : venda.getListaProdutoVenda()){
@@ -52,6 +56,6 @@ public class VendaController {
         venda.setValorTotal(valorTotal);
 
         produtoVendaRepository.saveAll(venda.getListaProdutoVenda());
-        vendaRepository.save(venda);
+        vendaRepository.save(posSave);
     }
 }
