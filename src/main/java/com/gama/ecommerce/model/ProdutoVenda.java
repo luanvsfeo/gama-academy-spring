@@ -14,6 +14,7 @@ public class ProdutoVenda {
     private Produto produto;
 
     @ManyToOne
+    @JoinColumn(name = "venda_id")
     private Venda venda;
 
     private Integer quantidade;
@@ -22,8 +23,7 @@ public class ProdutoVenda {
 
     private Double valorUnitario;
 
-    public ProdutoVenda() {
-    }
+    public ProdutoVenda() { }
 
     public ProdutoVenda(Produto produto, Venda venda, Integer quantidade, Double valorTotal, Double valorUnitario) {
         this.produto = produto;

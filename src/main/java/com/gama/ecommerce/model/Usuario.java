@@ -45,8 +45,7 @@ public class Usuario {
     @Column(nullable = false, length = 50)
     private String dataNascimento;
 
-    public Usuario() {
-    }
+    public Usuario() { }
 
     public Usuario(Long id) {
         this.id = id;

@@ -21,7 +21,6 @@ public class Produto {
     @Column(nullable = false, length = 80)
     private String nome;
 
-
     @NotBlank(message = "campo unidadeMedida não pode ser nulo")
     @Size(min = 1, max = 50)
     @Column(nullable = false, length = 50)

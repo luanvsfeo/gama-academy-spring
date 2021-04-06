@@ -14,8 +14,7 @@ public class Marca {
 
     private String nome;
 
-    public Marca() {
-    }
+    public Marca() { }
 
     public Marca(String nome) {
         this.nome = nome;
