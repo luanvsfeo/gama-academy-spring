@@ -19,7 +19,7 @@ public class Venda {
 
     private Date dataVenda = new Date();
 
-    @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "vendaId")
     private List<ProdutoVenda> listaProdutoVenda = new ArrayList<>();
 
     public Venda() { }

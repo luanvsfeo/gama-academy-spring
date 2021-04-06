@@ -40,7 +40,9 @@ public class VendaController {
     @PostMapping
     public void criar(@RequestBody Venda venda){
 
-
+        // TODO - Ver uma maneira mais acertiva de fazer isso
+        List<ProdutoVenda> produtoVendas  = venda.getListaProdutoVenda();
+        venda.setListaProdutoVenda(null);
         Venda posSave = vendaRepository.save(venda);
 
         posSave.setListaProdutoVenda(venda.getListaProdutoVenda());
@@ -48,12 +50,15 @@ public class VendaController {
         // TODO - Diminuir a quantidade em estoque de cada produto
         double valorTotal = 0;
 
-        for(ProdutoVenda produtoVenda : venda.getListaProdutoVenda()){
+        for(ProdutoVenda produtoVenda : produtoVendas){
             produtoVenda.setValorUnitario(produtoVenda.getProduto().getValorUnitario());
             produtoVenda.setValorTotal(produtoVenda.getProduto().getValorUnitario() * produtoVenda.getQuantidade());
+            produtoVenda.setVendaId(posSave.getId());
             valorTotal += produtoVenda.getValorTotal();
         }
+
         venda.setValorTotal(valorTotal);
+        venda.setListaProdutoVenda(produtoVendas);
 
         produtoVendaRepository.saveAll(venda.getListaProdutoVenda());
         vendaRepository.save(posSave);
