@@ -1,8 +1,6 @@
 package com.gama.ecommerce.model;
 
-import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.br.CPF;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -14,6 +12,7 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotBlank(message = "campo name não pode ser nulo")
     @Size(min = 1, max = 80)
     @Column(nullable = false, length = 80)
@@ -27,7 +26,7 @@ public class Usuario {
     @NotBlank(message = "campo cpf não pode ser nulo")
     @Size(min = 1, max = 50)
     @CPF
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, length = 50)
     private String cpf;
 
     @NotBlank(message = "campo login não pode ser nulo")
@@ -45,10 +44,7 @@ public class Usuario {
     @Column(nullable = false, length = 50)
     private String dataNascimento;
 
-
-
-    public Usuario() {
-    }
+    public Usuario() { }
 
     public Usuario(Long id) {
         this.id = id;

@@ -28,7 +28,11 @@ public class ProdutoController {
     @PutMapping
     @ResponseStatus(value = HttpStatus.OK)
     public ResponseEntity<Produto> alterarPorId(@PathVariable("id") Long id, @Valid @RequestBody Produto produto) {
-        if (!produtoRepository.existsById(id)) return ResponseEntity.notFound().build();
+
+        if (!produtoRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
         produto.setId(id);
         return ResponseEntity.ok(produtoRepository.save(produto));
     }
@@ -40,20 +44,21 @@ public class ProdutoController {
         if (produtoDB.isPresent()) {
             return ResponseEntity.ok(produtoDB.get());
         }
+
         return ResponseEntity.notFound().build();
     }
 
 
     @GetMapping
-    public List<Produto> listarTodos(@RequestParam(value = "marca",required = false) Long marca,
-                                     @RequestParam(value = "categoria",required = false) Long categoria,
+    public List<Produto> listarTodos(@RequestParam(value = "marca", required = false) Long marca,
+                                     @RequestParam(value = "categoria", required = false) Long categoria,
                                      @RequestParam(value = "valorUnitario", required = false) Double valorUnitario) {
         if (marca != null) {
-            return produtoRepository.findByMarca(new Marca(marca)).get();
+            return produtoRepository.findAllByMarca(new Marca(marca));
         } else if (categoria != null) {
-            return produtoRepository.findByCategoria(new Categoria(categoria)).get();
+            return produtoRepository.findAllByCategoria(new Categoria(categoria));
         } else if (valorUnitario != null) {
-            return produtoRepository.findByValorUnitario(valorUnitario).get();
+            return produtoRepository.findAllByValorUnitario(valorUnitario);
         } else {
             return produtoRepository.findAll();
         }
@@ -62,8 +67,11 @@ public class ProdutoController {
     @DeleteMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> apagar(@PathVariable("id") Long id) {
-        if (!produtoRepository.existsById(id))
+
+        if (!produtoRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
+        }
+
         produtoRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
