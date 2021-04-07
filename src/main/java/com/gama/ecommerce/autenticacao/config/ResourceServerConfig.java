@@ -13,9 +13,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception{
         http.authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/usuario", "/carros").authenticated()
-                .antMatchers(HttpMethod.GET,"/usuario", "/carros/**").authenticated()
-                .antMatchers(HttpMethod.DELETE,"/usuario", "/carros/**").authenticated()
-                .antMatchers(HttpMethod.PUT,"/usuario", "/carros/**").authenticated();
+                .antMatchers(HttpMethod.POST,"/usuario", "/produto", "/marca", "categoria").authenticated()
+                .antMatchers(HttpMethod.GET,"/usuario", "/produto/**", "/marca", "categoria").permitAll()
+                .antMatchers(HttpMethod.DELETE,"/usuario", "/produto/**", "/marca", "categoria").authenticated()
+                .antMatchers(HttpMethod.PUT,"/usuario", "/produto/**", "/marca", "categoria").authenticated();
     }
 }

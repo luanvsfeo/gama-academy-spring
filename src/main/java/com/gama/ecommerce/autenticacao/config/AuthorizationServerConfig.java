@@ -3,8 +3,10 @@ package com.gama.ecommerce.autenticacao.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -37,7 +39,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_IN_SECONDS)
                 .refreshTokenValiditySeconds(REFRESH_TOKEN_VALIDITY_IN_SECONDS);
     }
-
+    // http://localhost:8080/oauth/token?grant_type=password&username=teste124&password=123456
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.authenticationManager(authenticationManager)
