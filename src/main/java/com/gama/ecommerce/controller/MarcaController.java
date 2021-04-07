@@ -16,7 +16,6 @@ public class MarcaController {
     @Autowired
     public MarcaRepository marcaRepository;
 
-
     @GetMapping
     public List<Marca> listarTodos() {
         return marcaRepository.findAll();
