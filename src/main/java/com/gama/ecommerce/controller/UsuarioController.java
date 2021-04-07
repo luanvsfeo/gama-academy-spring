@@ -1,7 +1,10 @@
 package com.gama.ecommerce.controller;
 
+import com.gama.ecommerce.api.object.ViaCepObject;
+import com.gama.ecommerce.model.Endereco;
 import com.gama.ecommerce.model.Usuario;
 import com.gama.ecommerce.repository.UsuarioRepository;
+import com.gama.ecommerce.service.RestTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +23,15 @@ public class UsuarioController {
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
     public ResponseEntity<Usuario> incluir(@Valid @RequestBody Usuario usuario) {
-        return ResponseEntity.ok(repository.save(usuario));
+
+        ViaCepObject viaCepObject = RestTemplateService.getCepViaRestTemplate(usuario.getEndereco().getCep());
+
+        if(viaCepObject == null || repository.existsByCpfOrLogin(usuario.getCpf(),usuario.getLogin())){
+            return ResponseEntity.badRequest().build();
+        }else{
+            usuario.setEndereco(new Endereco(viaCepObject));
+            return ResponseEntity.ok(repository.save(usuario));
+        }
     }
 
 
