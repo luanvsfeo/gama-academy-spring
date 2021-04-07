@@ -20,13 +20,13 @@ public class UsuarioController {
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
     public ResponseEntity<Usuario> incluir(@Valid @RequestBody Usuario usuario) {
-        return ResponseEntity.ok( repository.save(usuario) );
+        return ResponseEntity.ok(repository.save(usuario));
     }
 
 
     @PutMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public ResponseEntity<Usuario> alterarPorId (@PathVariable("id") Long id, @Valid @RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> alterarPorId(@PathVariable("id") Long id, @Valid @RequestBody Usuario usuario) {
         if (!repository.existsById(id))
             return ResponseEntity.notFound().build();
         usuario.setId(id);

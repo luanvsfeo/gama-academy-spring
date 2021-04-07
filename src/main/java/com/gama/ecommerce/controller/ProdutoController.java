@@ -29,7 +29,7 @@ public class ProdutoController {
     @ResponseStatus(value = HttpStatus.OK)
     public ResponseEntity<Produto> alterarPorId(@PathVariable("id") Long id, @Valid @RequestBody Produto produto) {
 
-        if (!produtoRepository.existsById(id)){
+        if (!produtoRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
 
@@ -50,8 +50,8 @@ public class ProdutoController {
 
 
     @GetMapping
-    public List<Produto> listarTodos(@RequestParam(value = "marca",required = false) Long marca,
-                                     @RequestParam(value = "categoria",required = false) Long categoria,
+    public List<Produto> listarTodos(@RequestParam(value = "marca", required = false) Long marca,
+                                     @RequestParam(value = "categoria", required = false) Long categoria,
                                      @RequestParam(value = "valorUnitario", required = false) Double valorUnitario) {
         if (marca != null) {
             return produtoRepository.findAllByMarca(new Marca(marca));
@@ -68,7 +68,7 @@ public class ProdutoController {
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> apagar(@PathVariable("id") Long id) {
 
-        if (!produtoRepository.existsById(id)){
+        if (!produtoRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
 
