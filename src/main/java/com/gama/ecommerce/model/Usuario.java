@@ -27,7 +27,7 @@ public class Usuario {
     @NotBlank(message = "campo cpf não pode ser nulo")
     @Size(min = 1, max = 50)
     @CPF
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, unique = true)
     private String cpf;
 
     @NotBlank(message = "campo login não pode ser nulo")
@@ -44,6 +44,8 @@ public class Usuario {
     @Size(min = 1, max = 50)
     @Column(nullable = false, length = 50)
     private String dataNascimento;
+
+
 
     public Usuario() {
     }
@@ -98,7 +100,6 @@ public class Usuario {
     public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
-
 
     public String getLogin() {
         return login;

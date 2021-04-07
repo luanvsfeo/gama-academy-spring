@@ -1,7 +1,6 @@
 package com.gama.ecommerce.config;
 
 
-import com.gama.ecommerce.dto.UsuarioCustomDTO;
 import com.gama.ecommerce.model.Usuario;
 import com.gama.ecommerce.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
