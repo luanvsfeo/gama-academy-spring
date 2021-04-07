@@ -128,6 +128,10 @@ public class Produto {
     public void setValorUnitario(Double valorUnitario) {
         this.valorUnitario = valorUnitario;
     }
+
+    public void dimiuirQuantidadeDisponivel(int quantidadeSelecionado){
+        this.quantidadeDisponivel = this.quantidadeDisponivel - quantidadeSelecionado;
+    }
 }
 
 

@@ -1,5 +1,6 @@
 package com.gama.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
@@ -13,6 +14,7 @@ public class ProdutoVenda {
     @JoinColumn(name = "produto_id")
     private Produto produto;
 
+    @JsonIgnore
     private Long vendaId;
 
     private Integer quantidade;
@@ -91,5 +93,11 @@ public class ProdutoVenda {
                 ", valorTotal=" + valorTotal +
                 ", valorUnitario=" + valorUnitario +
                 '}';
+    }
+
+    public void popular(Produto produto, long vendaId){
+        this.setValorUnitario(produto.getValorUnitario());
+        this.setValorTotal(produto.getValorUnitario() * this.getQuantidade());
+        this.setVendaId(vendaId);
     }
 }

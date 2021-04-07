@@ -71,6 +71,11 @@ public class Venda {
         this.listaProdutoVenda = listaProdutoVenda;
     }
 
+    public void popular( List<ProdutoVenda> produtoVendas, double valorTotal){
+        this.setValorTotal(valorTotal);
+        this.setListaProdutoVenda(produtoVendas);
+    }
+
     @Override
     public String toString() {
         return "Venda{" +
