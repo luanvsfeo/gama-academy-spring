@@ -1,6 +1,8 @@
 package com.gama.ecommerce.model;
 
 import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -37,7 +39,7 @@ public class Usuario {
 
     @NotBlank(message = "campo senha não pode ser nulo")
     @Column(nullable = false)
-    @Size(min = 5, max = 10)
+    //@Size(min = 3, max = 10)
     private String senha;
 
     @Column(nullable = false)
@@ -116,6 +118,11 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+        criptografarSenha();
+    }
+
+    public void criptografarSenha() {
+        this.senha =  new BCryptPasswordEncoder().encode(senha);
     }
 
     public Endereco getEndereco() {
