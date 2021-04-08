@@ -1,5 +1,6 @@
 package com.gama.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
@@ -13,8 +14,8 @@ public class ProdutoVenda {
     @JoinColumn(name = "produto_id")
     private Produto produto;
 
-    @ManyToOne
-    private Venda venda;
+    @JsonIgnore
+    private Long vendaId;
 
     private Integer quantidade;
 
@@ -22,12 +23,12 @@ public class ProdutoVenda {
 
     private Double valorUnitario;
 
-    public ProdutoVenda() {
-    }
+    public ProdutoVenda() { }
 
-    public ProdutoVenda(Produto produto, Venda venda, Integer quantidade, Double valorTotal, Double valorUnitario) {
+    public ProdutoVenda(Long id, Produto produto, Long vendaId, Integer quantidade, Double valorTotal, Double valorUnitario) {
+        this.id = id;
         this.produto = produto;
-        this.venda = venda;
+        this.vendaId = vendaId;
         this.quantidade = quantidade;
         this.valorTotal = valorTotal;
         this.valorUnitario = valorUnitario;
@@ -49,12 +50,13 @@ public class ProdutoVenda {
         this.produto = produto;
     }
 
-    public Venda getVenda() {
-        return venda;
+
+    public Long getVendaId() {
+        return vendaId;
     }
 
-    public void setVenda(Venda venda) {
-        this.venda = venda;
+    public void setVendaId(Long vendaId) {
+        this.vendaId = vendaId;
     }
 
     public Integer getQuantidade() {
@@ -86,10 +88,16 @@ public class ProdutoVenda {
         return "ProdutoVenda{" +
                 "id=" + id +
                 ", produto=" + produto +
-                ", venda=" + venda +
+                ", vendaId=" + vendaId +
                 ", quantidade=" + quantidade +
                 ", valorTotal=" + valorTotal +
                 ", valorUnitario=" + valorUnitario +
                 '}';
+    }
+
+    public void popular(Produto produto, long vendaId){
+        this.setValorUnitario(produto.getValorUnitario());
+        this.setValorTotal(produto.getValorUnitario() * this.getQuantidade());
+        this.setVendaId(vendaId);
     }
 }

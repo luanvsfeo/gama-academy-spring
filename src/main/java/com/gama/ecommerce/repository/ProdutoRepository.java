@@ -11,9 +11,10 @@ import java.util.Optional;
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
-    Optional<List<Produto>> findByValorUnitario(Double valor);
-    Optional<List<Produto>> findByMarca(Marca marca);
-    Optional<List<Produto>> findByCategoria(Categoria categoria);
+    List<Produto> findAllByValorUnitario(Double valor);
+    List<Produto> findAllByMarca(Marca marca);
+    List<Produto> findAllByCategoria(Categoria categoria);
     Optional<Produto> findByNome(String nome);
+    boolean existsByQuantidadeDisponivelGreaterThanAndId(int quantidade, long id);
 
 }

@@ -21,7 +21,6 @@ public class Produto {
     @Column(nullable = false, length = 80)
     private String nome;
 
-
     @NotBlank(message = "campo unidadeMedida não pode ser nulo")
     @Size(min = 1, max = 50)
     @Column(nullable = false, length = 50)
@@ -128,6 +127,10 @@ public class Produto {
 
     public void setValorUnitario(Double valorUnitario) {
         this.valorUnitario = valorUnitario;
+    }
+
+    public void dimiuirQuantidadeDisponivel(int quantidadeSelecionado){
+        this.quantidadeDisponivel = this.quantidadeDisponivel - quantidadeSelecionado;
     }
 }
 
