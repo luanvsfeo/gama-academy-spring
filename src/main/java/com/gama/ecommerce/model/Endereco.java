@@ -31,6 +31,9 @@ public class Endereco {
 
     private String siafi;
 
+    public Endereco() {
+    }
+
     public Endereco(String logradouro, String cep, String bairro, String localidade, String uf, String ibge, String gia, String ddd, String siafi) {
         this.logradouro = logradouro;
         this.cep = cep;
