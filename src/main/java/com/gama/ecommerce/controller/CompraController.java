@@ -8,6 +8,7 @@ import com.gama.ecommerce.utils.ConversaoUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,7 +34,7 @@ public class CompraController {
 
 
     @PostMapping
-    public ResponseEntity<?> criar(@RequestBody Compra compra) {
+    public ResponseEntity<?> criar(@Valid @RequestBody Compra compra) {
 
         List<Long> produtosId = compra.getProdutos().stream().map(x->x.getProduto().getId()).collect(Collectors.toList());
 

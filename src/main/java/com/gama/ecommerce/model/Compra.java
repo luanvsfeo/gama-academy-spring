@@ -1,6 +1,7 @@
 package com.gama.ecommerce.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,6 +19,7 @@ public class Compra {
     private Date dataCompra;
 
     @OneToMany(mappedBy = "compraId")
+    @NotEmpty
     private List<ProdutoCompra> produtos = new ArrayList<>();
 
 

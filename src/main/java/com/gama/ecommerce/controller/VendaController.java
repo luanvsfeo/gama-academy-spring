@@ -11,6 +11,7 @@ import com.gama.ecommerce.utils.ConversaoUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class VendaController {
 
 
     @PostMapping
-    public ResponseEntity<?> criar(@RequestBody Venda venda) {
+    public ResponseEntity<?> criar(@Valid @RequestBody Venda venda) {
 
         List<ProdutoVenda> produtoVendas = venda.getProdutos();
         HashMap<Long, Integer> produtoQuantidade = ConversaoUtils.converterProdutoVendaListToMap(produtoVendas);
