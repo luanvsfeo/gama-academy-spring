@@ -17,18 +17,18 @@ public class Venda {
     @ManyToOne
     private Usuario usuario;
 
-    private Date dataVenda = new Date();
+    private Date dataVenda;
 
     @OneToMany(mappedBy = "vendaId")
-    private List<ProdutoVenda> listaProdutoVenda = new ArrayList<>();
+    private List<ProdutoVenda> produtos = new ArrayList<>();
 
     public Venda() { }
 
-    public Venda(Double valorTotal, Usuario usuario, Date dataVenda, List<ProdutoVenda> listaProdutoVenda) {
+    public Venda(Double valorTotal, Usuario usuario, Date dataVenda, List<ProdutoVenda> produtos) {
         this.valorTotal = valorTotal;
         this.usuario = usuario;
         this.dataVenda = dataVenda;
-        this.listaProdutoVenda = listaProdutoVenda;
+        this.produtos = produtos;
     }
 
     public Long getId() {
@@ -63,17 +63,18 @@ public class Venda {
         this.dataVenda = dataVenda;
     }
 
-    public List<ProdutoVenda> getListaProdutoVenda() {
-        return listaProdutoVenda;
+    public List<ProdutoVenda> getProdutos() {
+        return produtos;
     }
 
-    public void setListaProdutoVenda(List<ProdutoVenda> listaProdutoVenda) {
-        this.listaProdutoVenda = listaProdutoVenda;
+    public void setProdutos(List<ProdutoVenda> produtos) {
+        this.produtos = produtos;
     }
 
     public void popular( List<ProdutoVenda> produtoVendas, double valorTotal){
         this.setValorTotal(valorTotal);
-        this.setListaProdutoVenda(produtoVendas);
+        this.setProdutos(produtoVendas);
+        this.dataVenda =  new Date();
     }
 
     @Override
@@ -83,7 +84,7 @@ public class Venda {
                 ", valorTotal=" + valorTotal +
                 ", usuario=" + usuario +
                 ", dataVenda=" + dataVenda +
-                ", listaProdutoVenda=" + listaProdutoVenda +
+                ", listaProdutoVenda=" + produtos +
                 '}';
     }
 }

@@ -44,7 +44,7 @@ public class VendaController {
     @PostMapping
     public ResponseEntity<?> criar(@RequestBody Venda venda) {
 
-        List<ProdutoVenda> produtoVendas = venda.getListaProdutoVenda();
+        List<ProdutoVenda> produtoVendas = venda.getProdutos();
         HashMap<Long, Integer> produtoQuantidade = ConversaoUtils.converterListToMap(produtoVendas);
 
         for (Long produtoId : produtoQuantidade.keySet()) {
@@ -53,10 +53,10 @@ public class VendaController {
             }
         }
 
-        venda.setListaProdutoVenda(null);
+        venda.setProdutos(null);
         Venda posSave = vendaRepository.save(venda);
 
-        posSave.setListaProdutoVenda(venda.getListaProdutoVenda());
+        posSave.setProdutos(venda.getProdutos());
 
         double valorTotal = 0;
 
@@ -73,7 +73,7 @@ public class VendaController {
 
         posSave.popular(produtoVendas, valorTotal);
 
-        produtoVendaRepository.saveAll(venda.getListaProdutoVenda());
+        produtoVendaRepository.saveAll(venda.getProdutos());
         vendaRepository.save(posSave);
         return ResponseEntity.ok().build();
     }
