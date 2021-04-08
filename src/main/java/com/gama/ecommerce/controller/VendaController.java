@@ -47,34 +47,37 @@ public class VendaController {
         List<ProdutoVenda> produtoVendas = venda.getProdutos();
         HashMap<Long, Integer> produtoQuantidade = ConversaoUtils.converterListToMap(produtoVendas);
 
-        for (Long produtoId : produtoQuantidade.keySet()) {
-            if (!produtoRepository.existsByQuantidadeDisponivelGreaterThanAndId(produtoQuantidade.get(produtoId), produtoId)) {
-                return ResponseEntity.badRequest().build();
+        if(!produtoQuantidade.isEmpty()){
+            for (Long produtoId : produtoQuantidade.keySet()) {
+                if (!produtoRepository.existsByQuantidadeDisponivelGreaterThanAndId(produtoQuantidade.get(produtoId), produtoId)) {
+                    return ResponseEntity.badRequest().build();
+                }
             }
+
+            venda.setProdutos(null);
+            Venda posSave = vendaRepository.save(venda);
+
+            posSave.setProdutos(venda.getProdutos());
+
+            double valorTotal = 0;
+
+            for (ProdutoVenda produtoVenda : produtoVendas) {
+
+                Produto produto = produtoRepository.findById(produtoVenda.getProduto().getId()).get();
+                produto.dimiuirQuantidadeDisponivel(produtoVenda.getQuantidade());
+
+                produtoVenda.popular(produto, venda.getId());
+                valorTotal += produtoVenda.getValorTotal();
+
+                produtoRepository.save(produto);
+            }
+
+            posSave.popular(produtoVendas, valorTotal);
+
+            produtoVendaRepository.saveAll(venda.getProdutos());
+            vendaRepository.save(posSave);
+            return ResponseEntity.ok().build();
         }
-
-        venda.setProdutos(null);
-        Venda posSave = vendaRepository.save(venda);
-
-        posSave.setProdutos(venda.getProdutos());
-
-        double valorTotal = 0;
-
-        for (ProdutoVenda produtoVenda : produtoVendas) {
-
-            Produto produto = produtoRepository.findById(produtoVenda.getProduto().getId()).get();
-            produto.dimiuirQuantidadeDisponivel(produtoVenda.getQuantidade());
-
-            produtoVenda.popular(produto, venda.getId());
-            valorTotal += produtoVenda.getValorTotal();
-
-            produtoRepository.save(produto);
-        }
-
-        posSave.popular(produtoVendas, valorTotal);
-
-        produtoVendaRepository.saveAll(venda.getProdutos());
-        vendaRepository.save(posSave);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.badRequest().build();
     }
 }
