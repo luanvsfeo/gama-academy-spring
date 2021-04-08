@@ -1,7 +1,6 @@
 package com.gama.ecommerce.controller;
 
 import com.gama.ecommerce.api.object.ViaCepObject;
-import com.gama.ecommerce.model.Endereco;
 import com.gama.ecommerce.model.Usuario;
 import com.gama.ecommerce.repository.UsuarioRepository;
 import com.gama.ecommerce.service.RestTemplateService;
@@ -29,7 +28,7 @@ public class UsuarioController {
         if(viaCepObject == null || repository.existsByCpfOrLogin(usuario.getCpf(),usuario.getLogin())){
             return ResponseEntity.badRequest().build();
         }else{
-            usuario.setEndereco(new Endereco(viaCepObject));
+            usuario.getEndereco().atualizarComViaCepObject(viaCepObject);
             return ResponseEntity.ok(repository.save(usuario));
         }
     }
