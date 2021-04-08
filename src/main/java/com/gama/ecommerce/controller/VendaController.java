@@ -45,9 +45,9 @@ public class VendaController {
     public ResponseEntity<?> criar(@RequestBody Venda venda) {
 
         List<ProdutoVenda> produtoVendas = venda.getProdutos();
-        HashMap<Long, Integer> produtoQuantidade = ConversaoUtils.converterListToMap(produtoVendas);
+        HashMap<Long, Integer> produtoQuantidade = ConversaoUtils.converterProdutoVendaListToMap(produtoVendas);
 
-        if(!produtoQuantidade.isEmpty()){
+        if(!produtoQuantidade.isEmpty() || venda.getUsuario() == null){
             for (Long produtoId : produtoQuantidade.keySet()) {
                 if (!produtoRepository.existsByQuantidadeDisponivelGreaterThanAndId(produtoQuantidade.get(produtoId), produtoId)) {
                     return ResponseEntity.badRequest().build();
