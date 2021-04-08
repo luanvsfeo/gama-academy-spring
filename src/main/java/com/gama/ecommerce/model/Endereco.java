@@ -1,5 +1,6 @@
 package com.gama.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gama.ecommerce.api.object.ViaCepObject;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,31 +24,52 @@ public class Endereco {
 
     private String uf;
 
+    private Integer numero;
+
+    private String complemento;
+
+    @JsonIgnore
     private String ibge;
 
+    @JsonIgnore
     private String gia;
 
+    @JsonIgnore
     private String ddd;
 
+    @JsonIgnore
     private String siafi;
 
     public Endereco() {
     }
 
-    public Endereco(String logradouro, String cep, String bairro, String localidade, String uf, String ibge, String gia, String ddd, String siafi) {
+    public Endereco(String logradouro, String cep, String bairro, String localidade, String uf, Integer numero, String complemento, String ibge, String gia, String ddd, String siafi) {
         this.logradouro = logradouro;
         this.cep = cep;
         this.bairro = bairro;
         this.localidade = localidade;
         this.uf = uf;
+        this.numero = numero;
+        this.complemento = complemento;
         this.ibge = ibge;
         this.gia = gia;
         this.ddd = ddd;
         this.siafi = siafi;
     }
 
-
     public Endereco(ViaCepObject viaCepObject) {
+        this.logradouro = viaCepObject.getLogradouro();
+        this.cep = viaCepObject.getCep();
+        this.bairro = viaCepObject.getBairro();
+        this.localidade = viaCepObject.getLocalidade();
+        this.uf = viaCepObject.getUf();
+        this.ibge = viaCepObject.getIbge();
+        this.gia = viaCepObject.getGia();
+        this.ddd = viaCepObject.getDdd();
+        this.siafi = viaCepObject.getSiafi();
+    }
+
+    public void atualizarComViaCepObject(ViaCepObject viaCepObject) {
         this.logradouro = viaCepObject.getLogradouro();
         this.cep = viaCepObject.getCep();
         this.bairro = viaCepObject.getBairro();
@@ -137,5 +159,21 @@ public class Endereco {
 
     public void setSiafi(String siafi) {
         this.siafi = siafi;
+    }
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
     }
 }
