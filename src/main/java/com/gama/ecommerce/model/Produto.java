@@ -130,7 +130,11 @@ public class Produto {
     }
 
     public void dimiuirQuantidadeDisponivel(int quantidadeSelecionado){
-        this.quantidadeDisponivel = this.quantidadeDisponivel - quantidadeSelecionado;
+        this.quantidadeDisponivel -= quantidadeSelecionado;
+    }
+
+    public void aumentarQuantidadeDisponivel(int quantidadeComprado){
+        this.quantidadeDisponivel += quantidadeComprado;
     }
 }
 
