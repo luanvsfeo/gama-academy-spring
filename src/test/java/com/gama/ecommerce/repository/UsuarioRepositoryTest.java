@@ -31,8 +31,7 @@ class UsuarioRepositoryTest {
                 login,
                 "123456",
                 ConversaoUtils.converterStringToDate("1990-05-31"),
-                new Endereco("Rua Jurema", "21862371", "lunar", "Caxias", "RJ", "0002", "02", "21", "2365")
-        );
+                new Endereco("Rua Jurema", "21862371", "lunar", "Caxias", "RJ", 0002, "02", "21", "2365", ""));
         usuarioRepositoryParaOTeste.save(usuario);
 
         boolean seHouver = usuarioRepositoryParaOTeste.existsByCpfOrLogin(cpf, login);
