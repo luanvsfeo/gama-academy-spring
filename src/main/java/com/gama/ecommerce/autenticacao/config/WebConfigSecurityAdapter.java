@@ -42,6 +42,7 @@ public class WebConfigSecurityAdapter extends WebSecurityConfigurerAdapter {
             usuario.setNome("admin");
             usuario.setLogin("admin");
             usuario.setSenha("admin1");
+            usuario.criptografarSenha();
             usuario.setEmail("doAdmin@admin.com");
             usuario.setDataNascimento(ConversaoUtils.converterStringToDate("2000-05-16"));
             usuario.setCpf("79914865089");
