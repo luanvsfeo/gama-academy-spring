@@ -6,22 +6,22 @@
 
 # Documentação Desafio Final Gama Academy
 
-##Categorias
+## Categorias
 
 - GET `/categoria`
 ````text
     Retorna todas as categorias!
 ````
-####*Status Code*: 200
+#### *Status Code*: 200
 
 - POST `/categoria`
-####Exemplo de body:
+#### Exemplo de body:
 ````json
 {
   "nome": "eletrodomésticos"
 }
 ````
-####Resposta:
+#### Resposta:
 
 ````json
 {
@@ -29,18 +29,18 @@
   "nome": "eletrodomésticos"
 }
 ````
-####*Status Code*: 201
+#### *Status Code*: 201
 
-##Compra
+## Compra
 
 - GET `/compra`
 ````text
     Retorna todas as compras!
 ````
-####*Status Code*: 200
+#### *Status Code*: 200
 
 - POST `/categoria`
-####Exemplo de body:
+#### Exemplo de body:
 ````json
 {
   "produtos": [
@@ -59,7 +59,7 @@
   ]
 }
 ````
-####Resposta:
+#### Resposta:
 
 ````json
 {
@@ -92,24 +92,24 @@
   "valorTotal": 0
 }
 ````
-####*Status Code*: 201
+#### *Status Code*: 201
 
-##Marca
+## Marca
 
 - GET `/marca`
 ````text
     Retorna todas as marcas!
 ````
-####*Status Code*: 200
+#### *Status Code*: 200
 
 - POST `/marca`
-####Exemplo de body:
+#### Exemplo de body:
 ````json
 {
   "nome": "Consul"
 }
 ````
-####Resposta:
+#### Resposta:
 
 ````json
 {
@@ -117,9 +117,9 @@
   "nome": "Consul"
 }
 ````
-####*Status Code*: 201
+#### *Status Code*: 201
 
-##Produtos
+## Produtos
 
 - GET `/produto`
 ````text
@@ -128,7 +128,7 @@
         - Marca = consul
         - valorUnitario = 12,99
 ````
-####Resposta:
+#### Resposta:
 ````json
 [
   {
@@ -149,10 +149,10 @@
   }
 ]
 ````
-####*Status Code*: 200
+#### *Status Code*: 200
 
 - POST `/produto`
-####Exemplo de body:
+#### Exemplo de body:
 ````json
 {
   "categoria": {
@@ -168,7 +168,7 @@
   "valorUnitario": 0
 }
 ````
-####Resposta:
+#### Resposta:
 
 ````json
 {
@@ -191,11 +191,11 @@
   }
 }
 ````
-####*Status Code*: 201
+#### *Status Code*: 201
 
 - PUT `/produto/:id`
 
-####Exemplo de body:
+#### Exemplo de body:
 
 ````json
 {
@@ -213,7 +213,7 @@
 }
 ````
 
-####Resposta:
+#### Resposta:
 
 ````json
 {
@@ -237,11 +237,11 @@
 }
 ````
 
-####*Status Code*: 200
+#### *Status Code*: 200
 
 - GET `/produto/:id`
 
-####Resposta:
+#### Resposta:
 
 ````json
 {
@@ -265,23 +265,23 @@
 }
 ````
 
-####*Status Code*: 200
+#### *Status Code*: 200
 
 - DELETE `/produto/:id`
 
-####Resposta:
+#### Resposta:
 
 ````json
 {}
 ````
 
-####*Status Code*: 204
+#### *Status Code*: 204
 
-##Usuario
+## Usuario
 
 - POST `/usuario`
 
-####Exemplo de Body:
+#### Exemplo de Body:
 
 ````json
 {
@@ -295,7 +295,7 @@
 }
 ````
 
-####Resposta:
+#### Resposta:
 
 ````json
 {
@@ -319,11 +319,11 @@
 }
 ````
 
-####*Status Code*: 201
+#### *Status Code*: 201
 
 - GET `/usuario/:id`
 
-####Resposta:
+#### Resposta:
 ````json
 {
   "cpf": "string",
@@ -346,11 +346,11 @@
 }
 ````
 
-####*Status Code*: 200
+#### *Status Code*: 200
 
 - GET `/usuario/:id`
 
-####Exemplo de Body:
+#### Exemplo de Body:
 
 ````json
 {
@@ -364,7 +364,7 @@
 }
 ````
 
-####Resposta:
+#### Resposta:
 ````json
 {
   "cpf": "string",
@@ -387,16 +387,16 @@
 }
 ````
 
-####*Status Code*: 200
+#### *Status Code*: 200
 
 - DELETE `/usuario/:id`
 
-####Resposta:
+#### Resposta:
 ````json
 {}
 ````
 
-####*Status Code*: 204
+#### *Status Code*: 204
 
 - GET `/venda`
 
@@ -406,7 +406,7 @@
         - usuarioId = 1
 ````
 
-####Resposta:
+#### Resposta:
 ````json
 [
   {
@@ -460,11 +460,11 @@
 ]
 ````
 
-####*Status Code*: 204
+#### *Status Code*: 204
 
 - POST `/venda`
 
-####Exemplo de Body:
+#### Exemplo de Body:
 ````json
 {
   "produtos": [
@@ -495,7 +495,7 @@
 }
 ````
 
-####Resposta:
+#### Resposta:
 ````json
 {
   "dataVenda": "2021-04-09T15:23:50.801Z",
@@ -547,4 +547,4 @@
 }
 ````
 
-####*Status Code*: 201
+#### *Status Code*: 201
