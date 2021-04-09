@@ -1,4 +1,4 @@
-                 ## Dev's
+## Dev's
 - Luan Veiga Sampaio Féo
 - Amne Fredo
 - Gabriel Oliveira Ferreira
