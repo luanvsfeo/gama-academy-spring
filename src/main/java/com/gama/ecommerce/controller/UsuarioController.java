@@ -5,10 +5,11 @@ import com.gama.ecommerce.model.Endereco;
 import com.gama.ecommerce.model.Usuario;
 import com.gama.ecommerce.repository.UsuarioRepository;
 import com.gama.ecommerce.service.RestTemplateService;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
@@ -23,6 +24,10 @@ public class UsuarioController {
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
+    @ApiResponses(value = {
+            @ApiResponse(code = 201,message = "Criado com sucesso"),
+            @ApiResponse(code = 400,message = "Ocorreu um erro ao criar um usuario")}
+    )
     public ResponseEntity<Usuario> incluir(@Valid @RequestBody Usuario usuario) {
 
         ViaCepObject viaCepObject = RestTemplateService.getCepViaRestTemplate(usuario.getEndereco().getCep());
@@ -32,13 +37,16 @@ public class UsuarioController {
         }else{
             usuario.setEndereco(new Endereco(viaCepObject));
             usuario.criptografarSenha();
-            return ResponseEntity.ok(repository.save(usuario));
+            return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(usuario));
         }
     }
 
 
     @PutMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    @ApiResponses(
+            @ApiResponse(code = 204,message = "Alterado com sucesso")
+    )
     public ResponseEntity<Usuario> alterarPorId(@PathVariable("id") Long id, @Valid @RequestBody Usuario usuario) {
         if (!repository.existsById(id))
             return ResponseEntity.notFound().build();
