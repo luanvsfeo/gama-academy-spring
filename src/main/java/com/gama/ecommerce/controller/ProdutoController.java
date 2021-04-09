@@ -25,7 +25,7 @@ public class ProdutoController {
         return ResponseEntity.ok(produtoRepository.save(produto));
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public ResponseEntity<Produto> alterarPorId(@PathVariable("id") Long id, @Valid @RequestBody Produto produto) {
 
@@ -41,6 +41,7 @@ public class ProdutoController {
     public ResponseEntity<Produto> buscarPorId(@PathVariable("id") Long id) {
 
         Optional<Produto> produtoDB = produtoRepository.findById(id);
+
         if (produtoDB.isPresent()) {
             return ResponseEntity.ok(produtoDB.get());
         }

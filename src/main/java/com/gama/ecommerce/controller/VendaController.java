@@ -1,5 +1,6 @@
 package com.gama.ecommerce.controller;
 
+import com.gama.ecommerce.api.object.RespostaMensagem;
 import com.gama.ecommerce.model.Produto;
 import com.gama.ecommerce.model.ProdutoVenda;
 import com.gama.ecommerce.model.Usuario;
@@ -51,7 +52,7 @@ public class VendaController {
         if(!produtoQuantidade.isEmpty() || venda.getUsuario() == null){
             for (Long produtoId : produtoQuantidade.keySet()) {
                 if (!produtoRepository.existsByQuantidadeDisponivelGreaterThanAndId(produtoQuantidade.get(produtoId), produtoId)) {
-                    return ResponseEntity.badRequest().build();
+                    return ResponseEntity.status(404).body(new RespostaMensagem("Não possui quantidade o suficiente para venda"));
                 }
             }
 
@@ -76,9 +77,9 @@ public class VendaController {
             posSave.popular(produtoVendas, valorTotal);
 
             produtoVendaRepository.saveAll(venda.getProdutos());
-            vendaRepository.save(posSave);
-            return ResponseEntity.ok().build();
+            posSave = vendaRepository.save(posSave);
+            return ResponseEntity.ok(posSave);
         }
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.status(404).body(new RespostaMensagem("Venda sem usuario e/ou sem produtos"));
     }
 }
