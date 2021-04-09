@@ -19,7 +19,6 @@ public class Compra {
     private Date dataCompra;
 
     @OneToMany(mappedBy = "compraId")
-    @NotEmpty
     private List<ProdutoCompra> produtos = new ArrayList<>();
 
 

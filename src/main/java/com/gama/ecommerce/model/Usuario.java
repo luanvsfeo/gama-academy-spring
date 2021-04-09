@@ -39,7 +39,6 @@ public class Usuario {
 
     @NotBlank(message = "campo senha não pode ser nulo")
     @Column(nullable = false)
-    //@Size(min = 3, max = 10)
     private String senha;
 
     @Column(nullable = false)
