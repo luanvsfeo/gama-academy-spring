@@ -1,5 +1,6 @@
 package com.gama.ecommerce.utils;
 
+import com.gama.ecommerce.model.ProdutoCompra;
 import com.gama.ecommerce.model.ProdutoVenda;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,11 +19,19 @@ public class ConversaoUtils {
         }
     }
 
-    public static HashMap<Long, Integer> converterListToMap(List<ProdutoVenda> produtoVendas) {
+    public static HashMap<Long, Integer> converterProdutoVendaListToMap(List<ProdutoVenda> produtoVendas) {
         HashMap<Long, Integer> produtoQuantidade = new HashMap<>();
         for (ProdutoVenda produtoVenda : produtoVendas) {
             produtoQuantidade.put(produtoVenda.getProduto().getId(), produtoVenda.getQuantidade());
         }
         return produtoQuantidade;
+    }
+
+    public static HashMap<Long, Double> converterProdutoCompraListToMap(List<ProdutoCompra> produtoCompras) {
+        HashMap<Long, Double> produtoValorUnitario = new HashMap<>();
+        for (ProdutoCompra produtoCompra : produtoCompras) {
+            produtoValorUnitario.put(produtoCompra.getProduto().getId(), produtoCompra.getValorUnitario());
+        }
+        return produtoValorUnitario;
     }
 }
