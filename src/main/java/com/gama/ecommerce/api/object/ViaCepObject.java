@@ -7,7 +7,7 @@ public class ViaCepObject {
     String bairro;
     String localidade;
     String uf;
-    String ibge,gia,ddd,siafi;
+    String ibge, gia, ddd, siafi;
 
     public ViaCepObject(String logradouro, String cep, String bairro, String localidade, String uf, String ibge, String gia, String ddd, String siafi) {
         this.logradouro = logradouro;

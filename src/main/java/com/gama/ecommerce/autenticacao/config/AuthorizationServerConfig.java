@@ -17,6 +17,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+
     private static final int ACCESS_TOKEN_VALIDITY_IN_SECONDS = 3600;
     private static final int REFRESH_TOKEN_VALIDITY_IN_SECONDS = 3600;
 
@@ -39,7 +40,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_IN_SECONDS)
                 .refreshTokenValiditySeconds(REFRESH_TOKEN_VALIDITY_IN_SECONDS);
     }
+
     // http://localhost:8080/oauth/token?grant_type=password&username=teste124&password=123456
+
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.authenticationManager(authenticationManager)

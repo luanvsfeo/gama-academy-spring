@@ -11,7 +11,8 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@Configuration @EnableSwagger2
+@Configuration
+@EnableSwagger2
 public class SpringFoxConfig {
     @Bean
     public Docket apis() {
@@ -19,13 +20,17 @@ public class SpringFoxConfig {
                 select().apis(RequestHandlerSelectors.basePackage("com.gama"))
                 .paths(PathSelectors.any())
                 .build().apiInfo(apiInfo())
-                .useDefaultResponseMessages(false);    }
-                private ApiInfo apiInfo() {
+                .useDefaultResponseMessages(false);
+    }
+
+    private ApiInfo apiInfo() {
         return new ApiInfoBuilder().title("Documentação de uma Api Rest")
                 .description("\"Aplicação Spring Boot REST com anotações\"")
                 .version("1.0.0").license("")
                 .licenseUrl("")
                 .contact(new Contact("Amne Sampaio",
                         "",
-                        "amnesf@gmail.com")).build();        }}
+                        "amnesf@gmail.com")).build();
+    }
+}
 

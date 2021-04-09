@@ -20,13 +20,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class WebConfigSecurityAdapter extends WebSecurityConfigurerAdapter {
 
     @Override
-    public void configure(WebSecurity web) throws Exception{
-        web.ignoring().antMatchers("/v2/api-docs","/configuration/ui","/swagger-resource/**",
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resource/**",
                 "/configuration/security", "/swagger-ui.html", "webjars/**", "/h2-console/**");
     }
 
     @Bean
-    public AuthenticationManager customAuthenticationManager()throws Exception{
+    public AuthenticationManager customAuthenticationManager() throws Exception {
         return authenticationManagerBean();
     }
 
@@ -34,10 +34,12 @@ public class WebConfigSecurityAdapter extends WebSecurityConfigurerAdapter {
     public static BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+
     @Autowired
     public void autheticationManager(AuthenticationManagerBuilder builder,
                                      UsuarioRepository usuarioRepository) throws Exception {
-        if (usuarioRepository.count() == 0 ) {
+        if (usuarioRepository.count() == 0) {
             Usuario usuario = new Usuario();
             usuario.setNome("admin");
             usuario.setLogin("admin");
@@ -46,8 +48,9 @@ public class WebConfigSecurityAdapter extends WebSecurityConfigurerAdapter {
             usuario.setEmail("doAdmin@admin.com");
             usuario.setDataNascimento(ConversaoUtils.converterStringToDate("2000-05-16"));
             usuario.setCpf("79914865089");
-            // usuario.setEndereco();
-            usuarioRepository.save(usuario); }
+            usuarioRepository.save(usuario);
+        }
+
         builder.userDetailsService(login -> new UsuarioCustomDTO(usuarioRepository.findByLogin(login)));
 
         //http://localhost:8080/oauth/token?grant_type=password&username=admin&password=admin

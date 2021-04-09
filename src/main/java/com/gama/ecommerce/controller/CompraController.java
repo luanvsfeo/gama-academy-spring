@@ -17,8 +17,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/compra")
 public class CompraController {
 
-   @Autowired
-   private CompraRepository compraRepository;
+    @Autowired
+    private CompraRepository compraRepository;
 
     @Autowired
     private ProdutoRepository produtoRepository;
@@ -36,25 +36,25 @@ public class CompraController {
     @PostMapping
     public ResponseEntity<?> criar(@Valid @RequestBody Compra compra) {
 
-        List<Long> produtosId = compra.getProdutos().stream().map(x->x.getProduto().getId()).collect(Collectors.toList());
+        List<Long> produtosId = compra.getProdutos().stream().map(x -> x.getProduto().getId()).collect(Collectors.toList());
 
-        HashMap<Long,Double> produtoCompraMap = ConversaoUtils.converterProdutoCompraListToMap(compra.getProdutos());
+        HashMap<Long, Double> produtoCompraMap = ConversaoUtils.converterProdutoCompraListToMap(compra.getProdutos());
 
-        for(Long produtoId : produtoCompraMap.keySet()){
-            if(produtoCompraMap.get(produtoId) == null){
+        for (Long produtoId : produtoCompraMap.keySet()) {
+            if (produtoCompraMap.get(produtoId) == null) {
                 return ResponseEntity.badRequest().build();
             }
         }
 
-        if(produtosId.size() == produtoRepository.quantidadePorIds(produtosId)){
+        if (produtosId.size() == produtoRepository.quantidadePorIds(produtosId)) {
 
             List<ProdutoCompra> produtoCompraList = compra.getProdutos();
             compra.setProdutos(null);
             compra = compraRepository.save(compra);
 
-            double valorTotal = 0 ;
+            double valorTotal = 0;
 
-            for(ProdutoCompra produtoCompra : produtoCompraList){
+            for (ProdutoCompra produtoCompra : produtoCompraList) {
 
                 Produto produto = produtoRepository.findById(produtoCompra.getProduto().getId()).get();
                 produto.aumentarQuantidadeDisponivel(produtoCompra.getQuantidade());
@@ -69,7 +69,7 @@ public class CompraController {
             produtoCompraRepository.saveAll(produtoCompraList);
 
             return ResponseEntity.ok(compraRepository.save(compra));
-        }else{
+        } else {
             return ResponseEntity.badRequest().build();
         }
     }
