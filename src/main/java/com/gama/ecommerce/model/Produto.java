@@ -1,10 +1,7 @@
 package com.gama.ecommerce.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @Entity
 public class Produto {
@@ -27,9 +24,11 @@ public class Produto {
     private String unidadeMedida;
 
     @ManyToOne
+    @NotNull(message = "precisa ter uma marca")
     private Marca marca;
 
     @ManyToOne
+    @NotNull(message = "precisa ter uma categoria")
     private Categoria categoria;
 
     @Column(nullable = false)
