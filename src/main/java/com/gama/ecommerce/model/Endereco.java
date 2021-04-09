@@ -69,6 +69,19 @@ public class Endereco {
         this.siafi = viaCepObject.getSiafi();
     }
 
+    public Endereco(String logradouro, String cep, String bairro, String localidade, String uf, Integer numero, String complemento, String ibge, String gia, String ddd) {
+        this.logradouro = logradouro;
+        this.cep = cep;
+        this.bairro = bairro;
+        this.localidade = localidade;
+        this.uf = uf;
+        this.numero = numero;
+        this.complemento = complemento;
+        this.ibge = ibge;
+        this.gia = gia;
+        this.ddd = ddd;
+    }
+
     public void atualizarComViaCepObject(ViaCepObject viaCepObject) {
         this.logradouro = viaCepObject.getLogradouro();
         this.cep = viaCepObject.getCep();
