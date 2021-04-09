@@ -1,10 +1,13 @@
 package com.gama.ecommerce.controller;
 
+import com.gama.ecommerce.api.object.RespostaMensagem;
 import com.gama.ecommerce.model.*;
 import com.gama.ecommerce.repository.CompraRepository;
 import com.gama.ecommerce.repository.ProdutoCompraRepository;
 import com.gama.ecommerce.repository.ProdutoRepository;
 import com.gama.ecommerce.utils.ConversaoUtils;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +37,10 @@ public class CompraController {
 
 
     @PostMapping
+    @ApiResponses(value = {
+            @ApiResponse(code = 200,message = "Criado com sucesso"),
+            @ApiResponse(code = 400,message = "Ocorreu um erro ao criar")
+    })
     public ResponseEntity<?> criar(@Valid @RequestBody Compra compra) {
 
         List<Long> produtosId = compra.getProdutos().stream().map(x -> x.getProduto().getId()).collect(Collectors.toList());
@@ -42,7 +49,7 @@ public class CompraController {
 
         for (Long produtoId : produtoCompraMap.keySet()) {
             if (produtoCompraMap.get(produtoId) == null) {
-                return ResponseEntity.badRequest().build();
+                return ResponseEntity.status(400).body(new RespostaMensagem("Produto sem valor unitario"));
             }
         }
 
@@ -70,7 +77,7 @@ public class CompraController {
 
             return ResponseEntity.ok(compraRepository.save(compra));
         } else {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.status(400).body(new RespostaMensagem("Produto não cadastrado presente na compra"));
         }
     }
 }
